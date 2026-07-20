@@ -592,11 +592,6 @@ sudo systemctl start network-monitor
 
 ---
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, PR checklist,
-and dependency constraints.
-
 ## License
 
 MIT -- see [LICENSE](LICENSE).
