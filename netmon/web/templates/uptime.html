@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Uptime — Network Monitor{% endblock %}
+{% block nav_uptime %}active{% endblock %}
+{% block content %}
+  <h1>Website Uptime</h1>
+  <div id="uptime-list"><div class="empty-state">Loading…</div></div>
+{% endblock %}
+{% block scripts %}
+<script>document.addEventListener("DOMContentLoaded", NetmonDashboard.renderUptimePage);</script>
+{% endblock %}

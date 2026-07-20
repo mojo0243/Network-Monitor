@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Networks — Network Monitor{% endblock %}
+{% block nav_networks %}active{% endblock %}
+{% block content %}
+  <h1>Networks</h1>
+  <div id="networks-grid" class="grid-cards">
+    <div class="empty-state">Loading…</div>
+  </div>
+{% endblock %}
+{% block scripts %}
+<script>document.addEventListener("DOMContentLoaded", NetmonDashboard.renderNetworksPage);</script>
+{% endblock %}

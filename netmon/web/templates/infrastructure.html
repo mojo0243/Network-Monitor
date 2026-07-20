@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Infrastructure — Network Monitor{% endblock %}
+{% block nav_infra %}active{% endblock %}
+{% block content %}
+  <h1>Infrastructure</h1>
+  <div id="infra-list" class="grid-cards">
+    <div class="empty-state">Loading…</div>
+  </div>
+{% endblock %}
+{% block scripts %}
+<script>document.addEventListener("DOMContentLoaded", NetmonDashboard.renderInfraPage);</script>
+{% endblock %}

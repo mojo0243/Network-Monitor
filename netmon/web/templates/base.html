@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Home Network Monitor{% endblock %}</title>
+  <script>
+    // Runs before first paint so there's no flash of the wrong theme. The
+    // stored choice overrides the OS-level prefers-color-scheme in style.css
+    // via the :root[data-theme=...] blocks -- see that file's comment.
+    (function () {
+      var saved = localStorage.getItem("netmon-theme");
+      if (saved === "dark" || saved === "light") {
+        document.documentElement.setAttribute("data-theme", saved);
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Network Monitor</div>
+    <nav class="tabs">
+      <a href="/networks" class="{% block nav_networks %}{% endblock %}">Networks</a>
+      <a href="/infrastructure" class="{% block nav_infra %}{% endblock %}">Infrastructure</a>
+      <a href="/alerts" class="{% block nav_alerts %}{% endblock %}">Alerts</a>
+      <a href="/uptime" class="{% block nav_uptime %}{% endblock %}">Uptime</a>
+    </nav>
+    <div class="topbar-right">
+      <button id="theme-toggle" class="btn" type="button" title="Toggle dark/light theme"></button>
+      <span>{{ username }}</span>
+      <a href="/logout">Log out</a>
+    </div>
+  </header>
+  <main class="content">
+    {% block content %}{% endblock %}
+  </main>
+  <script src="/static/js/dashboard.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
