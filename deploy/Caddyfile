@@ -1,0 +1,21 @@
+# Caddy is the only thing this app exposes off of 127.0.0.1. It terminates
+# TLS (a locally-trusted self-signed cert, since this never needs a public
+# certificate) and reverse-proxies to uvicorn.
+#
+# Because the Pi should only have an IP on the wired-adult/management VLAN
+# (see docs/SETUP.md), binding to :443 here is already LAN-only in practice
+# -- there's no other network for it to be reachable from.
+
+{
+	# `tls internal` otherwise tries to install its local CA into the *Pi's
+	# own* system/browser trust stores on every start -- pointless on a
+	# headless box you browse to from other devices, and it fails loudly
+	# (via a doomed `sudo` call as the unprivileged caddy user) if it can't.
+	# See https://github.com/caddyserver/caddy/issues/4002.
+	skip_install_trust
+}
+
+:443 {
+	tls internal
+	reverse_proxy 127.0.0.1:8080
+}
