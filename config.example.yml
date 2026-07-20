@@ -1,0 +1,78 @@
+# Copy this file to config.yml and fill in your own values.
+# config.yml is gitignored on purpose -- it holds credentials.
+#
+# Anywhere below you see a dollar-brace placeholder like the ones in the
+# unifi/alerts/dashboard sections, the loader substitutes an environment
+# variable of that name at startup (see README.md's Configuration reference).
+
+networks:
+  - name: "Wired Adult"
+    vlan_id: 10
+    role: management       # this Pi should live on this network
+  - name: "Adults Wi-Fi"
+    vlan_id: 20
+    role: trusted
+  - name: "Kids"
+    vlan_id: 30
+    role: trusted
+  - name: "IoT"
+    vlan_id: 40
+    role: restricted
+  - name: "Guests"
+    vlan_id: 50
+    role: untrusted
+  - name: "iDRAC"
+    vlan_id: 60
+    role: management
+  - name: "Proxmox/GitLab"
+    vlan_id: 70
+    role: infrastructure
+  - name: "Training Lab"
+    vlan_id: 80
+    role: lab
+  - name: "Training DMZ"
+    vlan_id: 90
+    role: dmz
+  - name: "Web Site DMZ"
+    vlan_id: 100
+    role: dmz
+
+unifi:
+  host: "192.168.1.1"          # UDM-Pro IP or hostname
+  username: "monitor_pi"        # local (non-SSO) account, read-only role recommended
+  password: "${UNIFI_PASSWORD}"
+  site: "default"
+  verify_ssl: false             # UDM-Pro ships a self-signed cert by default
+  poll_interval_seconds: 30
+
+alerts:
+  new_device_days: 7
+  infra_offline_minutes: 20
+  discord_webhook_url: "${DISCORD_WEBHOOK_URL}"
+  heuristics:
+    enabled: true
+    flapping_window_minutes: 10
+    flapping_threshold: 6
+    new_device_spike_window_minutes: 15
+    new_device_spike_threshold: 5
+    off_hours_min_history_sightings: 50
+
+website_monitors:
+  - name: "m4cybersolutions.com"
+    url: "https://m4cybersolutions.com"
+    interval_seconds: 60
+    timeout_seconds: 10
+    failure_threshold: 2
+
+database:
+  path: "data/netmon.db"
+
+dashboard:
+  bind_host: "127.0.0.1"        # app only listens on loopback; Caddy is the sole exposed listener
+  bind_port: 8080
+  session_secret: "${SESSION_SECRET}"
+  session_max_age_hours: 12
+
+logging:
+  level: "INFO"
+  file: "data/netmon.log"

@@ -1,0 +1,15 @@
+# Kept intentionally free of packages that need to compile C extensions
+# (uvloop, httptools, bcrypt) so `pip install` is painless on a Raspberry Pi.
+fastapi==0.115.0
+uvicorn==0.30.6
+httpx==0.27.2
+SQLAlchemy==2.0.35
+greenlet==3.0.3
+aiosqlite==0.20.0
+alembic==1.13.2
+pydantic==2.9.2
+PyYAML==6.0.2
+passlib==1.7.4
+itsdangerous==2.2.0
+Jinja2==3.1.4
+python-multipart==0.0.9
